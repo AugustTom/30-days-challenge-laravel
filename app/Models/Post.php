@@ -9,7 +9,21 @@ class Post extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'text',
+    ];
+
     public function user(){
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
     }
 }
