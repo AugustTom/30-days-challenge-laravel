@@ -27,9 +27,9 @@ Route::get('posts/create', [PostsController::class, 'create']);
 
 Route::post('posts/create', [PostsController::class, 'store']);
 
-Route::get('posts/{}/edit', [PostsController::class, 'edit']);
+Route::get('posts/{id}/edit', [PostsController::class, 'edit']);
 
-
+Route::put('posts/{id}/edit', [PostsController::class, 'update']);
 
 
 //Auth::routes();
