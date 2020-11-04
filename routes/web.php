@@ -23,9 +23,11 @@ Route::get('/', [PagesController::class, 'index']);
 
 Route::get('/about', [PagesController::class, 'about']);
 
-Route::get('/create', [PostsController::class, 'create']);
+Route::get('posts/create', [PostsController::class, 'create']);
 
-Route::post('/create', [PostsController::class, 'store']);
+Route::post('posts/create', [PostsController::class, 'store']);
+
+Route::get('posts/{}/edit', [PostsController::class, 'edit']);
 
 
 
