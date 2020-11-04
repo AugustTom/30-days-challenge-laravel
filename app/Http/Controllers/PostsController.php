@@ -37,9 +37,6 @@ class PostsController extends Controller
         $post-> user_id = 1;
         $post -> save();
         return redirect('/') -> with('success','Post Created');
-
-
-
     }
 
     /**
@@ -83,19 +80,20 @@ class PostsController extends Controller
         $post-> user_id = 1;
         $post -> save();
         return redirect('/') -> with('success','Post Updated');
-
-
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post -> delete();
+        return redirect('/') -> with('success', 'Post Deleted');
     }
+
+
 }

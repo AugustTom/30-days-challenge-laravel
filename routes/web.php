@@ -31,7 +31,7 @@ Route::get('posts/{id}/edit', [PostsController::class, 'edit']);
 
 Route::put('posts/{id}/edit', [PostsController::class, 'update']);
 
-
+Route::delete('posts/{id}/edit', [PostsController::class, 'destroy']);
 //Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
