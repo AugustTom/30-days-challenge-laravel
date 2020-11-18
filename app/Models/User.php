@@ -41,10 +41,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /** Functions to retrieve relationships
+    *
+    * Comments function returns all the comments associated with the user
+    * @return HasMany relationship with Comment Model
+     *
+     */
     public function comments(){
        return $this-> hasMany("App\Models\Comment");
     }
 
+    /**
+     *
+     * posts function retrieves all the posts associated with the user
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany relationship with Post Model
+     */
     public function posts(){
         return $this -> hasMany('App\Models\Post');
     }

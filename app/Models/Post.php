@@ -19,10 +19,18 @@ class Post extends Model
         'text',
     ];
 
+    /** Functions to retrieve relationships
+     * user function returns the user that created the post
+     * @return BelongsTo relationship with User Model
+     */
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
 
+    /**
+    comment function retrieves all the comments that are made to post
+    * @return HasMany relationship with User Model
+    */
     public function comments(){
         return $this->hasMany('App\Models\Comment');
     }

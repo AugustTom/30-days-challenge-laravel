@@ -29,7 +29,6 @@ class CommentFactory extends Factory
         return [
             'text' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
             'user_id' => User::all()->random()->id,
-//            'post_id' => 1,
             'post_id' => Post::all()->random()->id,
         ];
     }

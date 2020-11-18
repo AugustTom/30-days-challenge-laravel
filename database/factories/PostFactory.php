@@ -25,7 +25,9 @@ class PostFactory extends Factory
     {
         return [
             'text' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => User::all()->random()->id,
+            'image' => $this->faker->image('public/images/post_images',
+                null, false)
 
         ];
     }
