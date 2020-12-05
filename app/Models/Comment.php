@@ -15,8 +15,6 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'post_id',
         'text',
     ];
 
@@ -32,7 +30,7 @@ class Comment extends Model
      * post function retrieves the post that the comment belongs to
      * @return BelongsTo relationship with Post Model
      */
-    public function post(){
-        return $this->belongsTo('App\Models\Post');
+    public function challenge(){
+        return $this->belongsTo('App\Models\Challenge');
     }
 }

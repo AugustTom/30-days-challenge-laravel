@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
+use App\Models\Challenge;
+use App\Models\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class PostFactory extends Factory
+class ModelFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Post::class;
+    protected $model = Model::class;
 
     /**
      * Define the model's default state.
@@ -24,11 +24,8 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'text' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
-            'user_id' => User::all()->random()->id,
-            'image' => $this->faker->image('public/images/post_images',
-                null, false)
-
+//            'challenge_id'   => Challenge::all()->random()->id,
+//            'user_id'   => User::all()->random()->id,
         ];
     }
 }

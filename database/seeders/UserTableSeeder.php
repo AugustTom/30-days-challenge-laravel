@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Challenge;
 use App\Models\User;
+
 use Illuminate\Database\Seeder;
 
 class UserTableSeeder extends Seeder
@@ -14,6 +16,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create();
+        User::factory(5)->hasAttached(Challenge::factory()->count(3),['timestamp'=>time()])
+            ->create();
     }
 }

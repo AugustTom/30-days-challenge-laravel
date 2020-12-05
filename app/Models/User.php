@@ -56,8 +56,12 @@ class User extends Authenticatable
      * posts function retrieves all the posts associated with the user
      * @return \Illuminate\Database\Eloquent\Relations\HasMany relationship with Post Model
      */
-    public function posts(){
-        return $this -> hasMany('App\Models\Post');
+    public function challenges(){
+        return $this -> hasMany('App\Models\Challenge');
+    }
+
+    public function participantIn(){
+        return $this -> belongsToMany('App\Models\Challenge','challenge_user','user_id','challenge_id');
     }
 
 }
