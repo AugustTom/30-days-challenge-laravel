@@ -27,6 +27,8 @@ class Challenge extends Model
     }
 
     public function participants(){
-        return $this -> belongsToMany('App\Models\User','challenge_user','challenge_id','user_id');
+        return $this -> belongsToMany('App\Models\User','challenge_participants',
+            'challenge_id'
+            ,'participant_id') ->withTimestamps();
     }
 }

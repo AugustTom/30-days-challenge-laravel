@@ -57,11 +57,15 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\HasMany relationship with Post Model
      */
     public function challenges(){
-        return $this -> hasMany('App\Models\Challenge');
+        return $this -> hasMany(Challenge::class);
     }
 
     public function participantIn(){
-        return $this -> belongsToMany('App\Models\Challenge','challenge_user','user_id','challenge_id');
+        return $this -> belongsToMany(Challenge::class,'challenge_participants',
+            'participant_id',
+            'challenge_id'
+            );
+
     }
 
 }

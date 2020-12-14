@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChallengeUserTable extends Migration
+class CreateChallengeParticipantTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,10 @@ class CreateChallengeUserTable extends Migration
     {
         Schema::create('challenge_participants', function (Blueprint $table) {
             $table->primary(['challenge_id','participant_id']);
-//            $table->unsignedBigInteger('challenge_id');
-//            $table->unsignedBigInteger('participant_id');
             $table->timestamps();
+
+//            $table->BigInteger('challenge_id') ->unsigned()->index();
+//            $table->BigInteger('participant_id')->unsigned()->index();
 
             $table->foreignId('challenge_id')->references('id')->on('challenges')
                 ->onDelete('cascade')->onUpdate("cascade");

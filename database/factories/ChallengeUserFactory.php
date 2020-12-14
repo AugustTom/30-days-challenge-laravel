@@ -24,8 +24,8 @@ class ModelFactory extends Factory
     public function definition()
     {
         return [
-//            'challenge_id'   => Challenge::all()->random()->id,
-//            'user_id'   => User::all()->random()->id,
+            'challenge_id'   => Challenge::all()->random()->id,
+            'user_id'   => User::all()->random()->id,
         ];
     }
 }

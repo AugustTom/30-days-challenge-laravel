@@ -16,7 +16,8 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->hasAttached(Challenge::factory()->count(3),['timestamp'=>time()])
-            ->create();
+
+        User::factory(5)->create();
+
     }
 }
