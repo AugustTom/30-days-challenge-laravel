@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PagesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,23 +16,26 @@ use App\Http\Controllers\PagesController;
 */
 
 //Route::get('/', function () {
-//    return 'hello';
+//    return view('welcome');
 //});
+Route::get("/",[PagesController::class,'index']);
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/', [PagesController::class, 'index']);
+require __DIR__.'/auth.php';
+
+Route::get("/",[PagesController::class,'index']);
 
 Route::get('/about', [PagesController::class, 'about']);
 
-Route::get('posts/create', [PostsController::class, 'create']);
+Route::get('posts/create', [PostsController::class, 'create'])->middleware('auth');
 
-Route::post('posts/create', [PostsController::class, 'store']);
+Route::post('posts/create', [PostsController::class, 'store'])->middleware('auth');
 
-Route::get('posts/{id}/edit', [PostsController::class, 'edit']);
+Route::get('posts/{id}/edit', [PostsController::class, 'edit'])->middleware('auth');
 
-Route::put('posts/{id}/edit', [PostsController::class, 'update']);
+Route::put('posts/{id}/edit', [PostsController::class, 'update'])->middleware('auth');
 
-Route::delete('posts/{id}/edit', [PostsController::class, 'destroy']);
-//Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::delete('posts/{id}/edit', [PostsController::class, 'destroy'])->middleware('auth');

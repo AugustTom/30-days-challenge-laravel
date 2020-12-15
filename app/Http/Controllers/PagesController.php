@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Challenge;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+
 
 class PagesController extends Controller
 {
     public function index(){
-        //TODO pagination is fucked
-        $challenges = Challenge::orderBy('created_at','desc')->paginate(10);
-        return view('pages.index') -> with('challenges', $challenges);
+
+        if(Auth::check()) {
+            $challenges = Challenge::orderBy('created_at', 'desc')->paginate(10);
+            return view('pages.index')->with('challenges', $challenges);
+        }
+        else{
+
+            return $this->about();
+        }
     }
 
     public function about(){
