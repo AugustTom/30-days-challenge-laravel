@@ -64,7 +64,7 @@ class User extends Authenticatable
         return $this -> belongsToMany(Challenge::class,'challenge_participants',
             'participant_id',
             'challenge_id'
-            );
+            )->withTimestamps();
 
     }
 

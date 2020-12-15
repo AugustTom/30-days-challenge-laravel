@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Challenge;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\PagesController;
 
@@ -29,14 +30,23 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $this -> validate($request, [
-            'text' => 'required'
+            'text' => 'required',
+            'image_placeholder.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
         ]);
-        $post = new Post;
+        $post = new Challenge;
         $post-> text = $request ->input('text');
+
+        if($request->hasFile('image_placeholder')) {
+            $file = $request->image_placeholder;
+            $name = time().'.'.$file->getClientOriginalName();
+            $file->move(public_path() . '/images/post_images', $name);
+            $post->image = $name;
+        }
+
         //TODO Add actual user here
         $post-> user_id = 1;
         $post -> save();
-        return redirect('/') -> with('success','Post Created');
+        return redirect('/') -> with('success','Challenge created!');
     }
 
     /**
@@ -58,7 +68,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Challenge::find($id);
         return view('posts.edit')->with('post',$post);
     }
 
@@ -72,14 +82,25 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         $this -> validate($request, [
-            'text' => 'required'
+            'text' => 'required',
+            'image_placeholder.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
         ]);
-        $post = Post::find($id);
-        $post-> text = $request ->input('text');
+        $post = Challenge::find($id);
+        $post->text = $request->input('text');
+
+        if($request->hasFile('image_placeholder')) {
+            $file = $request->image_placeholder;
+            $name = time().'.'.$file->getClientOriginalName();
+            $file->move(public_path() . '/images/post_images', $name);
+            $post->image = $name;
+        }
+        else{
+            $post->image = "something is still wrong";
+        }
         //TODO Add actual user here
         $post-> user_id = 1;
         $post -> save();
-        return redirect('/') -> with('success','Post Updated');
+        return redirect('/') -> with('success','Challenge updated');
     }
 
     /**
@@ -90,9 +111,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
+        $post = Challenge::find($id);
         $post -> delete();
-        return redirect('/') -> with('success', 'Post Deleted');
+        return redirect('/') -> with('success', 'Challenge deleted');
     }
 
 

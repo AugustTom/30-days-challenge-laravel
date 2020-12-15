@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{(asset('css/app.css'))}}">
-    <title> {{config('app.name','Yoga World')}}</title>
+    <title> {{config('app.name','30 Days Challenges')}}</title>
 
 
 </head>
@@ -13,5 +13,4 @@
     @include('inc.messages')
     @yield('content')
 </body>
-</html>
 </html>

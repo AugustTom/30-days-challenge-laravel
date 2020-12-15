@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h1>Edit post</h1>
-                <form method="post" action="{{action('App\Http\Controllers\PostsController@destroy',[$post ->id]) }}">
+                <form method="post"  enctype="multipart/form-data" action="{{action('App\Http\Controllers\PostsController@destroy',[$post ->id]) }}">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="float-right btn btn-danger">Delete</button>
@@ -31,9 +31,13 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Update</button>
                         <a class="btn btn-default" href="/">Cancel</a>
-{{--                                                    TODO: add image submission here--}}
-                        <button class="btn btn-secondary" style="float: right">Upload Image</button>
+                        <input style="float: right" id="image"
+                               type="file" class="btn btn-secondary" name="image_placeholder">
                     </div>
+                    <div class="form-group">
+                        <img src="{{asset("images/post_images/$post->image")}}">
+                    </div>
+{{--TODO make the image delete button in the middle of the image--}}
 
                 </form>
 

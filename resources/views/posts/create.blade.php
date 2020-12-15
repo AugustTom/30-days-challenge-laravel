@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h1>Create post</h1>
-                    <form method="post" action="{{ action('App\Http\Controllers\PostsController@store') }}">
+                    <form method="post" enctype="multipart/form-data" action="{{ action('App\Http\Controllers\PostsController@store') }}">
                     @csrf
                         <div class="form-group">
                             <label for="text">Your Post</label>
@@ -23,8 +23,8 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Create</button>
                             <button class="btn btn-default">Cancel</button>
-{{--                            TODO: add image submission here--}}
-                            <button class="btn btn-secondary" style="float: right">Upload Image</button>
+                            <input style="float: right" id="image"
+                                   type="file" class="btn btn-secondary" name="image_placeholder">
                         </div>
                     </form>
                 </div>

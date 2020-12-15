@@ -9,7 +9,13 @@ class Challenge extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['text'];
+    protected $fillable = ['text','image'];
+
+    public function getImage(){
+        return $this->image;
+    }
+
+
     /** Functions to retrieve relationships
      * user function returns the user that created the post
      * @return BelongsTo relationship with User Model

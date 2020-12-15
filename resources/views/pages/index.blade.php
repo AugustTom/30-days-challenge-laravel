@@ -1,18 +1,21 @@
 @extends('layouts.app')
 @section('content')
-    @if(count($posts) > 0)
+    @if(count($challenges) > 0)
         <div class="container">
-            @foreach($posts as $post)
+            @foreach($challenges as $challenge)
                 <div class="well">
-                    <h3>{{$post->text}}</h3>
-                    <a href="posts\{{$post->id}}\edit" class="btn btn-secondary float-right">Edit</a>
-                    <small>Written on {{$post->created_at}}</small>
-                    <small>Written by {{$post->user->name}}</small>
+                    <img src="{{asset("images/post_images/$challenge->image")}}">
+                    <h3>{{$challenge->text}}</h3>
+                    <a href="posts\{{$challenge->id}}\edit" class="btn btn-secondary float-right">Edit</a>
+
+                    <small>Posted by {{$challenge->user->name}}</small>
+                    <small>{{$challenge->created_at}}</small>
+
                 </div>
             @endforeach
         </div>
 {{--        TODO: fix weird pagination issue--}}
-        {{ $posts->links() }}
+        {{ $challenges->links() }}
     @else
         <p>It's empty :( </p>
     @endif
