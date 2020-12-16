@@ -46,6 +46,6 @@ Route::put('dashboard', [UserController::class, 'update'])->middleware('auth');
 
 //Comment part
 
-Route::get('/', 'CommentController@index')->middleware('auth');
-
-Route::post('/', 'CommentController@store')->middleware('auth');
+//Route::get('/', 'CommentController@index')->middleware('auth');
+//
+//Route::post('/', 'CommentController@store')->middleware('auth');

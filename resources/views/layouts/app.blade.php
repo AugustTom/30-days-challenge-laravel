@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{(asset('css/app.css'))}}">
     <title> {{config('app.name','30 Days Challenges')}}</title>
-
-
+{{--    TODO change it to <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>--}}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
+@yield('script')
 <body>
     @include('inc.navbar')
     @include('inc.messages')

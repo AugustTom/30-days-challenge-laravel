@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Challenge;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -16,15 +19,7 @@ class CommentController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -32,9 +27,21 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Challenge $challenge)
     {
-        //
+        $this -> validate($request, [
+            'text' => 'required',
+        ]);
+
+        $comment = new Comment();
+        $comment->text =$request->input('comment_text');
+
+
+        $comment->user_id = Auth::id() ;
+        $comment->challeng_id = $challenge->id;
+        $comment -> save();
+
+        return $comment->toJson();
     }
 
     /**
