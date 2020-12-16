@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,3 +40,12 @@ Route::get('posts/{id}/edit', [PostsController::class, 'edit'])->middleware('aut
 Route::put('posts/{id}/edit', [PostsController::class, 'update'])->middleware('auth');
 
 Route::delete('posts/{id}/edit', [PostsController::class, 'destroy'])->middleware('auth');
+
+Route::put('dashboard', [UserController::class, 'update'])->middleware('auth');
+
+
+//Comment part
+
+Route::get('/', 'CommentController@index')->middleware('auth');
+
+Route::post('/', 'CommentController@store')->middleware('auth');
