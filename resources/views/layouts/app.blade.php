@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{(asset('css/app.css'))}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
     <title> {{config('app.name','30 Days Challenges')}}</title>
 {{--    TODO change it to <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>--}}
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -17,5 +20,6 @@
     @include('inc.navbar')
     @include('inc.messages')
     @yield('content')
+    @include('inc.footer')
 </body>
 </html>

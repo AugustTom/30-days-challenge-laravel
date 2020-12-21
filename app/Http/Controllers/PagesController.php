@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\Challenge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class PagesController extends Controller
+class PagesController extends AuthenticatedSessionController
 {
     public function index(){
 
@@ -17,7 +18,7 @@ class PagesController extends Controller
         }
         else{
 
-            return $this->about();
+            return $this->create();
         }
     }
 
