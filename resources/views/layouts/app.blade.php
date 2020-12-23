@@ -16,10 +16,14 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 @yield('script')
-<body>
-    @include('inc.navbar')
-    @include('inc.messages')
-    @yield('content')
-    @include('inc.footer')
-</body>
+    <body class="flex-grow">
+        @include('inc.navbar')
+        @include('inc.messages')
+        @yield('content')
+
+    </body>
+
+    <footer>
+        @include('inc.footer')
+    </footer>
 </html>

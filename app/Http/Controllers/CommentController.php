@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Challenge;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CommentController extends Controller
 {
@@ -21,30 +23,53 @@ class CommentController extends Controller
         }
         else {
             $comments = Comment::all();
+            foreach ($comments as $comment) {
+                $comment->user_id = User::where('id', $comment->user_id);
+                }
+
         }
         return $comments;
     }
 
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $challenge_id
+     * @return Comment
+     */
+    public function apiStore(Request $request, int $challenge_id)
+    {
+
+        $comment = new Comment();
+        $comment->text = $request->input('text');
+
+
+        $comment->user_id = Auth::id() ;
+        $comment->challenge_id = $challenge_id;
+        $comment -> save();
+
+        return $comment;
+    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param int $comment_id
+     * @return Comment
      */
-    public function apiStore(Request $request, Challenge $challenge)
+    public function apiUpdate(Request $request)
     {
-        $this -> validate($request, [
-            'text' => 'required',
-        ]);
+//        $input = $request->all();
+////        return  $request->text;
+//        return $request;
+        $id = $request->input('comment-id');
+        $comment = Comment::find($id);
 
-        $comment = new Comment();
-        $comment->text =$request->input('comment_text');
+        $comment->text = $request->input('text');
 
-
-        $comment->user_id = Auth::id() ;
-        $comment->challeng_id = $challenge->id;
         $comment -> save();
 
         return $comment;

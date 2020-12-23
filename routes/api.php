@@ -21,5 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('comments', [CommentController::class, 'apiIndex'])->name('api.comments.index');
 Route::get('comments/{challenge_id?}', [CommentController::class, 'apiIndex'])->name('api.comment.index');
-Route::post('comments', [CommentController::class, 'apiStore']);
+
 

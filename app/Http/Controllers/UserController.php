@@ -15,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return null;
+        $users = User::all();
+        return view('auth.register_admin')->with('users',$users);
     }
 
     /**
@@ -88,6 +89,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return null;
+        $user = User::find($id);
+        $user -> delete();
+        return redirect('/users');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changeRights($id)
+    {
+        $user = User::find($id);
+        $user -> is_admin = !$user->is_admin;
+        $user->save();
+        return redirect('/users');
     }
 }

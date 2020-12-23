@@ -48,18 +48,14 @@
                                         <input type="email" class="form-control" id="eMail" placeholder="{{Auth::user()->email}}" disabled>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <label for="phone">Phone</label>
-                                        <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <label for="website">Website URL</label>
-                                        <input type="url" class="form-control" id="website" placeholder="Website url">
-                                    </div>
-                                </div>
+{{--
+--}}
+{{--                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label for="website">Website URL</label>--}}
+{{--                                        <input type="url" class="form-control" id="website" placeholder="Website url">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
                         </div>
 

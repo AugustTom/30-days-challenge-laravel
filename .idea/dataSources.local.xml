@@ -19,5 +19,26 @@
         <ssh-config-id>1a76cd4c-3ce5-482b-9e51-25a014bae92e</ssh-config-id>
       </ssh-properties>
     </data-source>
+    <data-source name="@localhost (home)" uuid="da8ac2a3-0571-4b8a-8325-10273eafbee3">
+      <database-info product="MySQL" version="5.7.31-0ubuntu0.18.04.1" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.21 (Revision: 33f65445a1bcc544eb0120491926484da168f199)" dbms="MYSQL" exact-version="5.7.31" exact-driver-version="8.0">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>homestead</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema">
+            <name qname="@" />
+            <name qname="homestead" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+      <ssh-properties>
+        <enabled>true</enabled>
+        <ssh-config-id>eca9642b-f43e-449e-a5f8-e3882297ee7e</ssh-config-id>
+      </ssh-properties>
+    </data-source>
   </component>
 </project>
