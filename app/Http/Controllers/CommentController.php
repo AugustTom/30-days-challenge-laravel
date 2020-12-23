@@ -75,5 +75,14 @@ class CommentController extends Controller
         return $comment;
     }
 
+    public function apiDelete(Request $request)
+    {
+        $id = $request->input('comment-id');
+        $comment = Comment::find($id);
+        $comment->delete();
+        return null;
+    }
+
+
 
 }

@@ -31,8 +31,9 @@
 
 <!-- comment form -->
 
-    <form method="post" class="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+    <form method="POST" class="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
         @csrf
+
         <div class="flex flex-wrap -mx-3 mb-6">
             <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
                 <div class="w-full md:w-full px-3 mb-2 mt-2">
@@ -54,7 +55,7 @@
 </div>
 {{--    Comments --}}
 @foreach(($challenge -> comments()->get()) as $comment)
-    <div class="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
+    <form class="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
         <div class="flex flex-row justify-center mr-2 ">
             <img alt="avatar" width="48" height="48" class="rounded-full w-10 h-10 mr-4 shadow-lg mb-4" src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png">
             <h3 class="text-purple-600 font-semibold text-lg text-center md:text-left ">{{$comment->user()->first()->name}}</h3>
@@ -72,6 +73,18 @@
                     <span>Edit</span>
                 </div>
             </button>
+            <form method="POST" >
+                @csrf
+                @method('DELETE')
+                <button class="delete"  value="{{$comment->id}}" onclick="deleteComment(event,this.value)">
+                    <div class="flex mr-2 text-gray-700 text-sm mr-4 ">
+                        <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        <span>Delete</span>
+                    </div>
+                </button>
+            </form>
         @endif
     </div>
 @endforeach
@@ -106,7 +119,7 @@
         var _token = $("#form-token-"+id).val();
 
         $.ajax({
-            type:'put',
+            type:'PUT',
             url: "{{ route('api.comments.update',
                             ['id'=> $challenge->id]) }}",
             data: {
@@ -117,7 +130,26 @@
             success:function(){
                 box.empty();
                 box.append(new_text);
-                // location.reload();
+
+            }, error: function (){
+                console.log("error");
+            }});
+    }
+
+    function deleteComment(e,id){
+        var _token = $("input[name=_token]").val();
+        e.preventDefault();
+        $.ajax({
+            type:'DELETE',
+            url: "{{ route('api.comments.destroy',
+                            ['id'=> $challenge->id]) }}",
+            data: {
+                "_token": _token,
+                'comment-id':id,
+            },
+            success:function(){
+                location.reload()
+
             }, error: function (){
                 console.log("error");
             }});

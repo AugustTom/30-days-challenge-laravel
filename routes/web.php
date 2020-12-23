@@ -46,6 +46,9 @@ name('api.comments.store')->middleware('auth');
 Route::put('posts/{id}', [CommentController::class, 'apiUpdate'])->
 name('api.comments.update')->middleware('auth');
 
+Route::delete('posts/{id}', [CommentController::class, 'apiDelete'])->
+name('api.comments.destroy')->middleware('auth');
+
 Route::put('posts/{id}/edit', [PostsController::class, 'update'])->middleware('auth');
 
 Route::delete('posts/{id}/edit', [PostsController::class, 'destroy'])->middleware('auth');
