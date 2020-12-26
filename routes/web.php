@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
+use App\Providers\CommentCreated;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,15 @@ Route::get('users', [UserController::class, 'index'])->name('register.admin')->m
 
 Route::delete('users{id?}', [UserController::class, 'destroy'])->name('register.admin')->middleware('auth');
 Route::put('users{id?}', [UserController::class, 'changeRights'])->name('register.admin')->middleware('auth');
+
+//TODO delete, broadcast example
+Route::get('counter',function () {
+    return view('counter');
+});
+
+Route::get('test', function () {
+
+});
 //Comment part
 
 //Route::get('/', 'CommentController@index')->middleware('auth');

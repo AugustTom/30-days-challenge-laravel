@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Challenge;
 use App\Models\Comment;
 use App\Models\User;
+use App\Providers\CommentCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -49,8 +50,13 @@ class CommentController extends Controller
         $comment->user_id = Auth::id() ;
         $comment->challenge_id = $challenge_id;
         $comment -> save();
-
+        $this->sendNotification();
         return $comment;
+    }
+
+    /** Created event notification*/
+    public function sendNotification(){
+        event(new CommentCreated(Auth()->user()));
     }
 
     /**
