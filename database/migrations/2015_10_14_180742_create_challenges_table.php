@@ -17,9 +17,10 @@ class CreateChallengesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->longText('text');
-            $table->string('image')->nullable();
+            $table->foreignId('image_id')->nullable()->references('id')->on('images')
+                ->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('user_id')->references('id')->on('users')
-                ->onDelete('cascade')->onUpdate("cascade");
+                ->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

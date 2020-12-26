@@ -68,7 +68,7 @@
                                 @if(Auth::user()->is_admin == true)
                                     <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                                        href="{{route('register.admin')}}">
-{{--                                        TODO change icon--}}
+                                        TODO change icon
                                         <div class="bg-teal-500 text-white rounded-lg p-3">
                                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                                         </div>
@@ -77,13 +77,13 @@
                                             <p class="text-sm">Register another admin</p>
                                         </div>
                                     </a>
-                                @endauth
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
 
-            @elseauth()
+            @else
                 <a href="{{ route('login') }}" class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white">
                     <span>Login</span>
                 </a>

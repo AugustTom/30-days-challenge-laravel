@@ -20,9 +20,9 @@
                                 </div>
 
                                 <p class="mt-3 text-gray-700 text-sm">{{$challenge->text}}</p>
-                                @if($challenge->image != null )
+                                @if($challenge->image_id != null )
                                     <div class="flex items-center justify-between  mx-auto">
-                                        <img src="{{asset("images/post_images/$challenge->image")}}">
+                                        <img src="{{asset("images/post_images/{$challenge->image()->first()->path}")}}">
                                     </div>
                                 @endif
                                 <div class="mt-4 flex items-center">

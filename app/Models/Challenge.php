@@ -9,10 +9,16 @@ class Challenge extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['text','image'];
+    protected $fillable = ['text','image_id'];
 
-    public function getImage(){
-        return $this->image;
+    public function image(){
+        if ($this->image_id != null){
+             return $this->belongsTo('App\Models\Image');
+            }
+        else
+            {
+                return null;
+            }
     }
 
 
