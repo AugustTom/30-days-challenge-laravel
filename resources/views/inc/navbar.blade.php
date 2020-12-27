@@ -1,4 +1,4 @@
-<nav class="flex items-center bg-gray-800 p-3 flex-wrap">
+<nav class="flex items-center bg-gray-800 p-3 flex-wrap" id ='bod'>
     <a href="/" class="p-2 mr-4 inline-flex items-center">
         <span class="text-xl text-white font-bold uppercase tracking-wide">{{config('app.name','30 Days Challenge')}}</span>
     </a>
@@ -14,11 +14,38 @@
             <a href="/" class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white">
                 <span>Home</span>
             </a>
+
             @endauth
             <a href="/about" class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white">
                 <span>About</span>
             </a>
             @auth()
+{{--                    --}}{{--                Notification pull down bar --}}
+{{--                    <div x-data="{ dropdownOpen: false }" class="relative">--}}
+{{--                        <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-grey p-2 focus:outline-none">--}}
+{{--                            <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">--}}
+{{--                                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />--}}
+{{--                            </svg>--}}
+{{--                        </button>--}}
+
+{{--                        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>--}}
+
+{{--                        <div x-show="dropdownOpen" class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">--}}
+{{--                            <div class="py-2 notification-list">--}}
+
+{{--                                <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">--}}
+{{--                                    <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar">--}}
+{{--                                    <p class="text-gray-600 text-sm mx-2">--}}
+{{--                                        <span class="font-bold" href="#">Sara Salah</span> replied on the <span class="font-bold text-blue-500" href="#">Upload Image</span> artical . 2m--}}
+{{--                                    </p>--}}
+{{--                                </a>--}}
+
+{{--                            </div>--}}
+{{--                            <a href="#" class="block bg-gray-800 text-white text-center font-bold py-2">See all notifications</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                Profile dropdown --}}
             <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex flex-row text-gray-900 bg-gray-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                         <span>Profile</span>
@@ -68,7 +95,7 @@
                                 @if(Auth::user()->is_admin == true)
                                     <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                                        href="{{route('register.admin')}}">
-                                        TODO change icon
+{{--                                        TODO change icon--}}
                                         <div class="bg-teal-500 text-white rounded-lg p-3">
                                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                                         </div>
@@ -93,46 +120,60 @@
             @endauth
         </div>
     </div>
+
 </nav>
+<div id="notification-block" class="fixed bottom-0 right-0">
 
+</div>
 
-{{--<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">--}}
-{{--    <a class="navbar-brand" href="/"></a>--}}
-{{--    <div class="collapse navbar-collapse" id="navbarCollapse">--}}
-{{--        <ul class="navbar-nav mr-auto">--}}
-{{--            @auth--}}
-{{--            <li class="nav-item active">--}}
-{{--                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>--}}
-{{--            </li>--}}
-{{--            @endif--}}
-{{--            <li class="nav-item">--}}
-{{--                <a class="nav-link" href="/about">About Us</a>--}}
-{{--            </li>--}}
+@auth()
+<script src="//js.pusher.com/7.0/pusher.min.js"></script>
+<script src="{{ asset('js/echo.iife.js') }}"></script>
+<script src="{{ asset('js/echo.js') }}"></script>
+<script type="text/javascript">
 
-{{--        </ul>--}}
+{{--    TODO COMMENT OUT--}}
+    Pusher.logToConsole = true;
 
-{{--        <ul class="nav navbar-nav navbar-right">--}}
-{{--            @if (Route::has('login'))--}}
-{{--                    @auth--}}
-{{--                        <li class="nav-item"><a href="/posts/create"> <button class="btn btn-secondary">Create a challenge</button></a></li>--}}
-{{--                        <li class="nav-item"><a href="{{ url('/dashboard') }}"><button class="btn btn-outline-secondary">Profile</button></a></li>--}}
-{{--                        <li class="nav-item"><form method="POST" action="{{ route('logout') }}">--}}
-{{--                                @csrf--}}
-{{--                                <button class="btn btn-outline-secondary" type="submit">Log Out</button>--}}
-{{--                            </form>--}}
-{{--                        </li>--}}
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: '1eca814a7567b4cf8958',
+        cluster: 'eu',
+        forceTLS: true});
 
-{{--                    @else--}}
-{{--                        <li class="nav-item"><a href="{{ route('login') }}" ><button class="btn btn-outline-secondary">Login</button></a></li>--}}
+    var channel = Echo.private('notifications.{{Auth::user()->id}}')
 
-{{--                        @if (Route::has('register'))--}}
-{{--                        <li class="nav-item"><a href="{{ route('register') }}"><button class="btn btn-outline-secondary">Register</button></a></li>--}}
-{{--                        @endif--}}
+    channel.listen(".CommentCreated", (e) => {
 
-{{--                    @endif--}}
-{{--            @endif--}}
-{{--        </ul>--}}
+        console.log(e)
+            showNotification(e);
+            hideNotification();
+        });
 
+    function showNotification(data){
+        // var jsonData = JSON.stringify()(data)
 
-{{--    </div>--}}
-{{--</nav>--}}
+        $('#notification-block').append(`
+        <a href="/posts/`+data.challenge_id+`">
+            <div class="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="w-2 bg-gray-800"></div>
+                    <div class="flex items-center px-2 py-3">
+                        <img class="w-12 h-12 object-cover rounded-full" src="">
+                    <div class="mx-3">
+                        <h2 class="text-xl font-semibold text-gray-800">`+ data.commentator +` commented on your challenge.</h2>
+                        <p class="text-gray-600">`+data.comment+`</p>
+                    </div>
+                </div>
+            </div>
+        </a>`);
+
+    }
+    function hideNotification(){
+        setTimeout(function (){
+        $('#notification-block').hide()
+    }, 50000);
+    }
+
+</script>
+@endauth
+

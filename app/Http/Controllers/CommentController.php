@@ -46,17 +46,19 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->text = $request->input('text');
 
-
         $comment->user_id = Auth::id() ;
         $comment->challenge_id = $challenge_id;
         $comment -> save();
-        $this->sendNotification();
+        $challenge = Challenge::find($challenge_id);
+        $this->sendNotification($challenge, $comment);
         return $comment;
     }
 
-    /** Created event notification*/
-    public function sendNotification(){
-        event(new CommentCreated(Auth()->user()));
+    /** Created event notification
+     * @param int $challenge_id
+     */
+    public function sendNotification(Challenge $challenge, Comment $comment){
+        event(new CommentCreated(Auth()->user(), $challenge, $comment));
     }
 
     /**

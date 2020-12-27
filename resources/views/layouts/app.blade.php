@@ -14,6 +14,8 @@
 
 {{--    Axios script--}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 @yield('script')
     <body class="flex-grow">

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Challenge;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -15,20 +17,25 @@ class CommentCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user;
-//    public $post_id;
+    public $commentator;
+    public $challenge;
     public $message;
+    public $username;
+    public $comment;
+
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param User $user
+     * @param Challenge $challenge
      */
-    public function __construct(User $user)
+    public function __construct(User $commentator, Challenge $challenge, Comment $comment)
     {
-        $this->user = $user;
-        $username = $user->name;
-//        $this->post_id = $post_id;
-        $this->message = "{$username} commented on your challenge";
+        $this->commentator = $commentator;
+        $this -> username = $commentator ->name;
+        $this-> challenge = $challenge;
+        $this->comment = $comment;
+        $this->message = "{$this->username} commented on your challenge";
     }
 
     /**
@@ -38,7 +45,8 @@ class CommentCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['status-liked'];
+        $user_channel_id = $this->challenge->user()->first()->id;
+        return new PrivateChannel('notifications.'.$user_channel_id);
     }
 
     /**
@@ -48,6 +56,20 @@ class CommentCreated implements ShouldBroadcast
      */
     public function broadcastAs()
     {
-        return 'comment.created';
+        return 'CommentCreated';
+    }
+
+    /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return ['commentator' => $this->username,
+            'challenge_id' => $this->challenge->id,
+            'commentator_avatar' => $this->commentator->avatar,
+            'message' => $this->message,
+            'comment' => $this->comment->text];
     }
 }
