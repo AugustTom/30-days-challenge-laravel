@@ -43,4 +43,8 @@ class Challenge extends Model
             'challenge_id'
             ,'participant_id') ->withTimestamps();
     }
+
+    public function likes(){
+        return $this->hasMany('App\Models\Like');
+    }
 }

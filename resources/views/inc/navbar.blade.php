@@ -122,7 +122,7 @@
     </div>
 
 </nav>
-<div id="notification-block" class="fixed bottom-0 right-0">
+<div id="notification-block" class="fixed bottom-0 right-0 m-8">
 
 </div>
 
@@ -155,7 +155,7 @@
 
         $('#notification-block').append(`
         <a href="/posts/`+data.challenge_id+`">
-            <div class="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden my-2">
                 <div class="w-2 bg-gray-800"></div>
                     <div class="flex items-center px-2 py-3">
                         <img class="w-12 h-12 object-cover rounded-full" src="">
