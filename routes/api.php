@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('comments', [CommentController::class, 'apiIndex'])->name('api.comments.index');
 Route::get('comments/{challenge_id?}', [CommentController::class, 'apiIndex'])->name('api.comment.index');
+
+
 
 

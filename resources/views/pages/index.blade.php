@@ -26,33 +26,39 @@
                                     </div>
                                 @endif
                                 <div class="mt-4 flex items-center">
-        {{--                                    <div class="flex mr-2 text-gray-700 text-sm mr-3">--}}
-        {{--                                        <svg fill="none" viewBox="0 0 24 24"  class="w-4 h-4 mr-1" stroke="currentColor">--}}
-        {{--                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
-        {{--                                                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5--}}
-        {{--                                                   0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>--}}
-        {{--                                        </svg>--}}
-        {{--                                        <span>12</span>--}}
-        {{--                                    </div>--}}
-                                    <div class="flex mr-2 text-gray-700 text-sm mr-8">
+                                    <form method="POST">
+                                        @csrf
+                                        <input id="form-token" type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button class="flex mr-2 text-gray-700 text-sm " value="{{$challenge->id}}"
+                                                onclick="likeChallenge(this.value)">
+                                            <svg fill="none" viewBox="0 0 24 24"  class="w-4 h-4 mr-1" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5
+                                                       0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                            </svg>
+                                            <span id="like_count-{{$challenge->id}}">{{count($challenge->likes()->get())}}</span>
+                                        </button>
+                                    </form>
+                                    <div class="flex mr-2 text-gray-700 text-sm ">
                                         <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
                                         </svg>
                                         <span>{{count($challenge->comments()->get())}}</span>
                                     </div>
-                                    @if(Auth::id() == $challenge->user_id or Auth::user()->is_admin == true)
-                                        <a href="posts\{{$challenge->id}}\edit" class="btn btn-secondary">
-                                            <div class="flex mr-2 text-gray-700 text-sm mr-4 float-right">
-                                                <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                                <span>Edit</span>
-                                            </div>
-                                        </a>
-                                    @endif
+
                                 </div>
+                                @if(Auth::id() == $challenge->user_id or Auth::user()->is_admin == true)
+                                    <a href="posts\{{$challenge->id}}\edit" class="btn btn-secondary">
+                                        <div class="flex mr-2 text-gray-700 text-sm mr-4 float-right">
+                                            <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                            <span>Edit</span>
+                                        </div>
+                                    </a>
+                                @endif
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </a>
             @endforeach
@@ -72,10 +78,7 @@
                     console.log(data);
                     $("#comment-section").html("");
                     $.each(data, function (index, item) {
-                        // container.html(''); //clears container for new data
-                        // $.each(data, function (i, item) {
                         $("#comment-section").append('<div>'+ item.text+'</div>');
-                        // });
                         $("#comment-section").append('<br>');
                     });
                 }, error: function () {
@@ -83,5 +86,23 @@
                 }
             });
         });
+
+        function likeChallenge(challenge_id){
+                    event.preventDefault();
+                    var _token = $("input[name=_token]").val();
+                    var url = 'posts/' +challenge_id +'/like'
+                    var text_box = $('#like_count-'+challenge_id)
+                    $.ajax({
+                        type:'POST',
+                        url: url,
+                        data:{'_token':_token,'challenge_id':challenge_id},
+                        success:function(){
+
+                            var count = parseInt(text_box.text()) + 1;
+                            text_box.text(count);
+                        }, error: function (){
+                            console.log("error");
+                        }});
+                }
     </script>
 @endsection

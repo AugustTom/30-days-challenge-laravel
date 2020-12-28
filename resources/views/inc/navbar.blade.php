@@ -146,9 +146,14 @@
     channel.listen(".CommentCreated", (e) => {
 
         console.log(e)
-            showNotification(e);
-            hideNotification();
-        });
+        showNotification(e);
+        hideNotification();
+        })
+    .listen(".PostLiked", (e) => {
+        console.log(e)
+        showLikeNotification(e);
+        hideNotification();
+    } );
 
     function showNotification(data){
         // var jsonData = JSON.stringify()(data)
@@ -168,6 +173,26 @@
         </a>`);
 
     }
+
+
+function showLikeNotification(data){
+    // var jsonData = JSON.stringify()(data)
+
+    $('#notification-block').append(`
+        <a href="/posts/`+data.challenge_id+`">
+            <div class="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden my-2">
+                <div class="w-2 bg-gray-800"></div>
+                    <div class="flex items-center px-2 py-3">
+                        <img class="w-12 h-12 object-cover rounded-full" src="">
+                    <div class="mx-3">
+                        <h2 class="text-xl font-semibold text-gray-800">`+ data.user +` liked your challenge</h2>
+                        <p class="text-gray-600"></p>
+                    </div>
+                </div>
+            </div>
+        </a>`);
+
+}
     function hideNotification(){
         setTimeout(function (){
         $('#notification-block').hide()
