@@ -13,7 +13,7 @@ class PagesController extends AuthenticatedSessionController
     public function index(){
 
         if(Auth::check()) {
-            $challenges = Challenge::orderBy('created_at', 'desc')->paginate(10);
+            $challenges = Challenge::orderBy('created_at', 'desc')->simplePaginate(5);
             return view('pages.index')->with('challenges', $challenges);
         }
         else{

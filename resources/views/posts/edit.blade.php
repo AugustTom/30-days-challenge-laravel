@@ -42,8 +42,10 @@
             </div>
 
     </div>
-    <div class="form-group">
-        <img src="{{asset("images/post_images/$post->image")}}">
-    </div>
+    @if($post->image_id != null )
+        <div class="flex items-center justify-between  mx-auto">
+            <img src="{{asset("images/post_images/{$post->image()->first()->path}")}}">
+        </div>
+    @endif
 
 @endsection
