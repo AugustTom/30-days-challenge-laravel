@@ -16,10 +16,6 @@ class CreateChallengeParticipantTable extends Migration
         Schema::create('challenge_participants', function (Blueprint $table) {
             $table->primary(['challenge_id','participant_id']);
             $table->timestamps();
-
-//            $table->BigInteger('challenge_id') ->unsigned()->index();
-//            $table->BigInteger('participant_id')->unsigned()->index();
-
             $table->foreignId('challenge_id')->references('id')->on('challenges')
                 ->onDelete('cascade')->onUpdate("cascade");
             $table->foreignId('participant_id')->references('id')->on('users')

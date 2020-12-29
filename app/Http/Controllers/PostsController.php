@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Challenge;
 
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Auth;
@@ -133,6 +134,15 @@ class PostsController extends Controller
         $post -> delete();
         return redirect('/') -> with('success', 'Challenge deleted');
     }
+
+    public function enter($challenge_id){
+        $user = Auth::user();
+
+        $user->participantIn()->attach($challenge_id);
+        return null;
+    }
+
+
 
 
 }

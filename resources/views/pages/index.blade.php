@@ -58,6 +58,23 @@
                                         </a>
                                     </div>
 
+{{--                            PARTICIPATE BUTTON --}}
+                                    @if(!Auth::user()->isParticipant($challenge->id))
+                                        {{Auth::user()->isParticipant($challenge->id)}}
+                                    <form method="POST">
+                                        @csrf
+                                        <div class="group">
+                                            <input id="form-token" type="hidden" name="_token_participate" value="{{ csrf_token() }}">
+                                            <button value="{{$challenge->id}}" class="bg-white text-gray-700 font-medium py-1 px-4 border
+                                            border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" onclick="enterChallenge(this.value)">Enter this challenge</button>
+                                        </div>
+
+                                    </form>
+                                    @else
+                                        <button class="bg-gray-700 text-white font-medium py-1 px-4 border
+                                            border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100 disabled:opacity-50" disabled >
+                                            Entered this challenge</button>
+                                        @endif
                                 </div>
 
                             </div>
@@ -92,7 +109,7 @@
     <script>
         $(document).ready(function() {
             $.ajax({
-                type: 'GET', //THIS NEEDS TO BE GET
+                type: 'GET',
                 url: '/api/comments/{{$challenge->id}}',
                 dataType: 'json',
                 success: function (data) {
@@ -125,5 +142,20 @@
                             console.log("error");
                         }});
                 }
+
+        function enterChallenge(challenge_id){
+            event.preventDefault();
+            var _token = $("input[name=_token_participate]").val();
+            var url = 'posts/' + challenge_id +'/enter'
+            $.ajax({
+                type:'POST',
+                url: url,
+                data:{'_token':_token,'challenge_id':challenge_id},
+                success:function(){
+                    console.log("hello")
+                }, error: function (){
+                    console.log("error");
+                }});
+        }
     </script>
 @endsection

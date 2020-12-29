@@ -47,4 +47,6 @@ class Challenge extends Model
     public function likes(){
         return $this->hasMany('App\Models\Like');
     }
+
+
 }
