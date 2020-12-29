@@ -45,6 +45,8 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
 
+
+
 {{--                Profile dropdown --}}
             <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex flex-row text-gray-900 bg-gray-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
@@ -76,16 +78,15 @@
                                     </div>
                                 </a>
 
-
+                                {{--LOGOUT BUTTON--}}
                                 <form method="POST" action="{{ route('logout') }}" >
                                     @csrf
-{{--                                    <button type="submit" class="flex flex row items-start items-start rounded-lg bg-transparent p-2">--}}
                                     <div class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                        <button type="submit" class="">
+                                        <button type="submit" class="inline-flex">
                                             <div class="bg-teal-500 text-white rounded-lg p-3">
                                                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
                                             </div>
-                                            <div class="ml-3 ">
+                                            <div class="ml-auto ">
                                                 <p class="font-semibold">Log out</p>
                                                 <p class="text-sm">Bye! </p>
                                             </div>
