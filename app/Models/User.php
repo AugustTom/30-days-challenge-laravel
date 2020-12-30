@@ -73,4 +73,8 @@ class User extends Authenticatable
         return $this->participantIn()->exists($challenge_id);
     }
 
+    public function image(){
+        return $this->morphOne(Image::class, 'imageable')->withDefault(['path'=>'images/avatars/default.png']);
+    }
+
 }

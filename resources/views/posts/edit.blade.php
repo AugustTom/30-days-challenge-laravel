@@ -44,7 +44,7 @@
     </div>
     @if($post->image_id != null )
         <div class="flex items-center justify-between  mx-auto">
-            <img src="{{asset("images/post_images/{$post->image()->first()->path}")}}">
+            <img src="{{asset($challenge->image->path)}}">
         </div>
     @endif
 

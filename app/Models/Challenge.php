@@ -12,13 +12,7 @@ class Challenge extends Model
     protected $fillable = ['text','image_id'];
 
     public function image(){
-        if ($this->image_id != null){
-             return $this->belongsTo('App\Models\Image');
-            }
-        else
-            {
-                return null;
-            }
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 

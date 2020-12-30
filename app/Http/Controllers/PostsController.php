@@ -42,21 +42,24 @@ class PostsController extends Controller
         $user_id = Auth::id();
         $post = new Challenge;
         $post-> text = $request ->input('text');
+        $post-> user_id = $user_id;
+        $post -> save();
 
         if($request->hasFile('image_placeholder')) {
 
             $image = new Image();
             $file = $request->image_placeholder;
+            $path = '/images/post_images/';
             $name = time().'.'.$file->getClientOriginalName();
-            $file->move(public_path() . '/images/post_images', $name);
-            $image-> path = $name;
+            $image-> path = $path.$name;
+            $image->imageable_id = $post->id;
+            $image->imageable_type = Challenge::class;
             $image->save();
+            $file->move(public_path() .$path,$name);
 
-            $post-> image_id = $image -> id;
         }
 
-        $post-> user_id = $user_id;
-        $post -> save();
+
         return redirect('/') -> with('success','Challenge created!');
     }
 
@@ -103,17 +106,20 @@ class PostsController extends Controller
 
         if($request->hasFile('image_placeholder')) {
 //            TODO delete old image file
-            if ($post->image_id != null) {
-                $image = Image::find($post->image_id);
-            } else {
-                $image = new Image();
+            if($post->image != null){
+                $image = Image::find($id);
             }
-            $file = $request-> image_placeholder;
+            else{
+                $image = new Image();
+                $image->imageable_id = $post->id;
+                $image->imageable_type = Challenge::class;
+            }
+            $file = $request->image_placeholder;
+            $path = '/images/post_images/';
             $name = time().'.'.$file->getClientOriginalName();
-            $file->move(public_path() . '/images/post_images', $name);
-            $image-> path = $name;
+            $image-> path = $path.$name;
             $image->save();
-            $post-> image_id = $image -> id;
+            $file->move(public_path() .$path,$name);
         }
 
 
