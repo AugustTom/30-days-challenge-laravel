@@ -22,14 +22,9 @@
     <section>
 {{--        TODO FILL in the text--}}
         <div class="flex-auto mx-4 md:mx-auto  py-7 max-w-md md:max-w-3xl pt-10" >
-            <p class="text-lg text-gray-700">
+            <p class="text-lg text-gray-700 text-center">
 
-                orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-                in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                This website is part of the Swansea University CS348 coursework. It was created by Auguste Tomaseviciute. The idea behin the site is that everyone is able to create challenges that last 30 days and invite others to participate. </p>
         </div>
     </section>
 

@@ -155,10 +155,10 @@
                             </div>
 
                         </div>
-                        <div class="mt-10 py-10 border-t border-gray-300 text-center">
+                        <div class="mt-10 py-10  text-center">
                             <div class="flex flex-wrap justify-center">
                                 <div id="about-section" class="w-full lg:w-9/12 px-4">
-                                        <p class="mb-4 text-lg leading-relaxed text-gray-800">
+                                        <p class=" text-lg leading-relaxed text-gray-800">
                                             @if(Auth::user()->about == null)
                                                 You haven't written your about section just yet. Click that edit button and change that!
                                             @else
@@ -166,6 +166,22 @@
                                             @endif
                                         </p>
 
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="my-4 border-t border-gray-300 text-center">
+                            <div class="flex flex-wrap justify-center">
+                                <div class="w-full lg:w-9/12 py-10">
+                                    <span class="font-bold uppercase text-lg mb-3"> participant in these challenges: </span>
+                                    <ul>
+                                        @foreach(Auth::user()->participantIn as $challenge)
+
+                                            <li><span class="">{{$challenge->text}} </span>({{$challenge->start_date}}-{{$challenge->end_date}}) </li>
+
+
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
                         </div>
