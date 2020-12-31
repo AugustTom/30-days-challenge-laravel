@@ -68,7 +68,7 @@ class CommentCreated implements ShouldBroadcast
     {
         return ['commentator' => $this->username,
             'challenge_id' => $this->challenge->id,
-            'commentator_avatar' => $this->commentator->avatar,
+            'commentator_avatar' => $this->commentator->image->path,
             'message' => $this->message,
             'comment' => $this->comment->text];
     }

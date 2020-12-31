@@ -48,7 +48,7 @@
 
 
 {{--                Profile dropdown --}}
-            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+            <div @click.away="open = false" class="relative z-50 " x-data="{ open: false }">
                     <button @click="open = !open" class="flex flex-row text-gray-900 bg-gray-200 items-center w-full px-3 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                         <span>Profile</span>
                         <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -172,7 +172,7 @@
             <div class="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden my-2">
                 <div class="w-2 bg-gray-800"></div>
                     <div class="flex items-center px-2 py-3">
-                        <img class="w-12 h-12 object-cover rounded-full" src="">
+                        <img class="w-12 h-12 object-cover rounded-full" src="` + data.commentator_avatar + `">
                     <div class="mx-3">
                         <h2 class="text-xl font-semibold text-gray-800">`+ data.commentator +` commented on your challenge.</h2>
                         <p class="text-gray-600">`+data.comment+`</p>
@@ -192,7 +192,7 @@ function showLikeNotification(data){
             <div class="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden my-2">
                 <div class="w-2 bg-gray-800"></div>
                     <div class="flex items-center px-2 py-3">
-                        <img class="w-12 h-12 object-cover rounded-full" src="">
+                        <img class="w-12 h-12 object-cover rounded-full" src="` + data.avatar + `">
                     <div class="mx-3">
                         <h2 class="text-xl font-semibold text-gray-800">`+ data.user +` liked your challenge</h2>
                         <p class="text-gray-600"></p>

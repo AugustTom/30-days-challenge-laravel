@@ -1,8 +1,9 @@
 
-<div class="bg-gray-100 pt-2 ">
+<div class="bg-gray-300 pt-2">
+    <div class="w-100  bg-gray-400 " style="height: 1px"></div>
     <div class="flex pb-5 px-3 m-auto pt-5 text-gray-800 text-sm flex-col
       md:flex-row max-w-6xl">
-        <div class="mt-2">© Copyright 2020. All Rights Reserved.</div>
+        <div class="mt-2">Auguste Tomaseviciute © Copyright 2020. All Rights Reserved.</div>
         <div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
             <a href="https://github.com/AugustTom" class="w-6 mx-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24">

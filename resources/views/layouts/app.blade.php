@@ -20,7 +20,7 @@
 @yield('script')
 
         @include('inc.navbar')
-        <div class="min-h-screen">
+        <div class="min-h-screen bg-gray-300">
                 @include('inc.messages')
                 @yield('content')
         </div>

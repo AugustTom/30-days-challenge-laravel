@@ -8,7 +8,7 @@
     <!-- post card -->
 <div class="post">
     <div class="flex items-start px-4 py-6">
-        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="avatar">
+        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="{{asset($challenge->user->image->path)}}" alt="avatar">
         <div class="">
             <div class="flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{$challenge->user->name}} </h2>
@@ -57,7 +57,8 @@
 @foreach(($challenge -> comments()->get()) as $comment)
     <div class="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
         <div class="flex flex-row justify-center mr-2 ">
-            <img alt="avatar" width="48" height="48" class="rounded-full w-10 h-10 mr-4 shadow-lg mb-4" src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png">
+            <img alt="avatar" width="48" height="48" class="rounded-full w-10 h-10 mr-4 shadow-lg mb-4"
+                 src="{{asset($challenge->user->image->path)}}">
             <h3 class="text-purple-600 font-semibold text-lg text-center md:text-left ">{{$comment->user()->first()->name}}</h3>
         </div>
         <div class="text-gray-600 text-lg text-center md:text-left" id="comment-box-{{$comment->id}}">

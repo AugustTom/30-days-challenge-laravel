@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,12 +73,39 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::find(Auth::user()->id);
+
+        $user = User::find( Auth::id());
+
         $this -> validate($request, [
             'name' => 'required',
         ]);
+
         $user->name = $request->input('name');
+        $user->about = $request->input('about-section');
+
+        $id = $user->id;
+
+        if($request->hasFile('image_holder')) {
+//
+            if($user->image != null){
+                $image = $user->image;
+            }
+            else{
+                $image = new Image();
+                $image->imageable_id = $id;
+                $image->imageable_type = User::class;
+                dd($image);
+            }
+            $file = $request->image_holder;
+            $path = '/images/avatars/';
+            $name = time().'.'.$file->getClientOriginalName();
+            $image-> path = $path.$name;
+            $image->save();
+            $file->move(public_path() .$path,$name);
+
+        }
         $user->save();
+
         return redirect('/dashboard') -> with('success','Profile updated');
     }
 

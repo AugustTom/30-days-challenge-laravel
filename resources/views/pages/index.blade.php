@@ -5,13 +5,13 @@
 @section('content')
 
     @if(count($challenges) > 0)
-        <div class="posts flex-auto mx-4 md:mx-auto  max-w-md md:max-w-3xl ">
+        <div class="posts flex-auto mx-4 md:mx-auto  py-7 max-w-md md:max-w-3xl ">
             @foreach($challenges as $challenge)
 
-                    <div class="flex bg-white shadow-lg rounded-lg my-7 w-full">
+                    <div class="flex bg-white shadow-lg rounded-lg mb-4  w-full">
                         <div class="flex items-start px-4 py-6 w-full ">
                             <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                             src="{{asset(Auth::user()->image->path)}}" alt="avatar">
+                             src="{{asset($challenge->user->image->path)}}" alt="avatar">
                             <div class="">
                                 <div class="flex items-center justify-between">
                                     <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{$challenge->user->name}}</h2>

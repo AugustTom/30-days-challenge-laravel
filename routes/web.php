@@ -69,6 +69,8 @@ name('api.like.store')->middleware('auth');
 Route::post('posts/{id}/enter', [PostsController::class, 'enter'])->
 name('challenge.enter')->middleware('auth');
 
+
+
 //Route::get('/', 'CommentController@index')->middleware('auth');
 //
 //Route::post('/', 'CommentController@store')->middleware('auth');

@@ -61,6 +61,6 @@ class LikedPost implements ShouldBroadcast
     {
         return ['user' => $this->user->name,
             'challenge_id' => $this->challenge->id,
-            'user_id' => $this->user->avatar];
+            'avatar' => $this->user->image->path];
     }
 }
