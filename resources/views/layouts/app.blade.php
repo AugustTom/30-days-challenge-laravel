@@ -18,14 +18,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 @yield('script')
-
+<body class="bg-gray-300">
         @include('inc.navbar')
         <div class="min-h-screen bg-gray-300">
                 @include('inc.messages')
                 @yield('content')
         </div>
 
-
+</body>
     <footer>
         @include('inc.footer')
     </footer>

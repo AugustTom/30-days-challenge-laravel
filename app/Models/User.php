@@ -70,7 +70,7 @@ class User extends Authenticatable
     }
 
     public function isParticipant( $challenge_id){
-        return $this->participantIn()->exists($challenge_id);
+        return $this->participantIn()->where('challenge_id', $challenge_id)->exists();
     }
 
     public function image(){
