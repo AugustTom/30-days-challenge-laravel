@@ -13,13 +13,21 @@
                             <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
                              src="{{asset($challenge->user->image->path)}}" alt="avatar">
                             <div class="">
+
                                 <div class="flex items-center justify-between">
                                     <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{$challenge->user->name}}</h2>
-                                    <small class="text-sm text-gray-700 px-8">{{$challenge->created_at}}</small>
-
                                 </div>
 
-                                <p class="mt-3 text-gray-700 text-sm">{{$challenge->text}}</p>
+
+                                <p class="my-3 text-gray-600 text-lg ">{{$challenge->text}}</p>
+
+                                <div>
+                                    <small class="text-sm text-gray-600"><span class="uppercase font-bold ">Starts on: </span>{{$challenge->start_date}}</small>
+                                </div>
+                                <div>
+                                    <small class="text-sm text-gray-600"><span class="uppercase font-bold">Ends on: </span>{{$challenge->end_date}}</small>
+                                </div>
+
                                 @if($challenge->image != null )
                                     <div class="flex items-center justify-between  mx-auto">
                                         <img src="{{asset($challenge->image->path)}}">

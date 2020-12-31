@@ -6,6 +6,7 @@ use App\Models\Challenge;
 
 use App\Models\Image;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Auth;
@@ -43,8 +44,12 @@ class PostsController extends Controller
         $post = new Challenge;
         $post-> text = $request ->input('text');
         $post-> user_id = $user_id;
-        $post -> save();
 
+        $date = Carbon::now();
+        $post -> start_date = $date->toDateString();
+        $post -> end_date = $date->addDays(30)->toDateString();
+
+        $post -> save();
         if($request->hasFile('image_placeholder')) {
 
             $image = new Image();
