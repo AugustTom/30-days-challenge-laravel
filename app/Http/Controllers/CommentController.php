@@ -6,7 +6,9 @@ use App\Models\Challenge;
 use App\Models\Comment;
 use App\Models\User;
 use App\Providers\CommentCreated;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -15,7 +17,7 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Comment[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
+     * @return Comment[]|Collection|Response
      */
     public function apiIndex($challenge_id = null)
     {
@@ -36,7 +38,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $challenge_id
      * @return Comment
      */
@@ -64,7 +66,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $comment_id
      * @return Comment
      */

@@ -91,7 +91,7 @@
             {{--                                EDIT BUTTON          --}}
             @if(Auth::id() == $challenge->user_id or Auth::user()->is_admin == true)
                 <div class="ml-auto">
-                    <a href="posts\{{$challenge->id}}\edit" class="float-right">
+                    <a href="\posts\{{$challenge->id}}\edit" class="float-right">
                         <div class="flex w-full text-gray-700 text-sm mr-4  float-right">
                             <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -140,7 +140,7 @@
                         {{$comment->text}}
                     </div>
 
-                    @if(Auth::id() == $challenge->user_id or Auth::user()->is_admin == true)
+                    @if(Auth::id() == $comment->user_id or Auth::user()->is_admin == true)
                         <button class="edit"  value="{{$comment->id}}" onclick="editComments(this.value)">
                             <div class="flex mr-2 text-gray-700 text-sm mr-4 ">
                                 <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">

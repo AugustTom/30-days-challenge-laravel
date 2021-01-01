@@ -10,7 +10,8 @@
 
     <title> {{config('app.name','30 Days Challenges')}}</title>
 {{--    TODO change it to <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>--}}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>--}}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
 {{--    Axios script--}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -11,6 +11,11 @@ class Challenge extends Model
 
     protected $fillable = ['text','image_id'];
 
+
+    /** Functions to retrieve relationships
+     * function returns image that belongs to the challenge
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne relationship with Image Model
+     */
     public function image(){
         return $this->morphOne(Image::class, 'imageable');
     }
@@ -32,12 +37,20 @@ class Challenge extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
+    /** Functions to retrieve relationships
+     * function returns users that belongs to the challenge
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany relationship with User Model
+     */
     public function participants(){
         return $this -> belongsToMany('App\Models\User','challenge_participants',
             'challenge_id'
             ,'participant_id') ->withTimestamps();
     }
 
+    /** Functions to retrieve relationships
+     * function returns likes that belongs to the challenge
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany relationship with Like Model
+     */
     public function likes(){
         return $this->hasMany('App\Models\Like');
     }

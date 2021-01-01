@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\Challenge;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 
 
 class PagesController extends AuthenticatedSessionController
 {
+    /** return list of database items
+    */
     public function index(){
 
         if(Auth::check()) {
@@ -21,6 +23,9 @@ class PagesController extends AuthenticatedSessionController
             return $this->create();
         }
     }
+    /** Returns about page
+     *
+     */
 
     public function about(){
         $title = 'About website';

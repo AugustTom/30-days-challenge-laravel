@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Auth;
 class LikeController extends Controller
 {
 
-
+    /** Creates new like
+     * @param int $challenge_id
+     * @return Like
+     */
     public function apiStore( int $challenge_id)
     {
 
@@ -27,7 +30,7 @@ class LikeController extends Controller
     }
 
     /** Created event notification
-     * @param int $challenge_id
+     * @param Challenge $challenge
      */
     public function sendNotification(Challenge $challenge){
         event(new LikedPost(Auth()->user(), $challenge));
@@ -36,7 +39,7 @@ class LikeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $comment_id
      * @return Comment
      */

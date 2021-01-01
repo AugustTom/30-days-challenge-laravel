@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Challenge;
 
 use App\Models\Image;
-use App\Models\User;
+
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\PagesController;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
@@ -18,7 +23,7 @@ class PostsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function create()
     {
@@ -28,8 +33,9 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse|Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -72,7 +78,7 @@ class PostsController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function show($id)
     {
@@ -83,10 +89,10 @@ class PostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @param int $id - id of the challenge that needs to edited
+     * @return Application|Factory|View|Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $post = Challenge::find($id);
         return view('posts.edit')->with('post',$post);
@@ -95,9 +101,9 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @return Application|RedirectResponse|Response|Redirector
      */
     public function update(Request $request, $id)
     {
@@ -136,16 +142,22 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @param int $id
+     * @return Application|RedirectResponse|Response|Redirector
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $post = Challenge::find($id);
         $post -> delete();
         return redirect('/') -> with('success', 'Challenge deleted');
     }
 
+    /**
+     * Enters user into a challenge.
+     *
+     * @param $challenge_id
+     * @return null
+     */
     public function enter($challenge_id){
         $user = Auth::user();
 
