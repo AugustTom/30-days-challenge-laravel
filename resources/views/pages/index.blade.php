@@ -11,7 +11,7 @@
                     <div class="flex bg-white shadow-lg rounded-lg mb-4  w-full">
                         <div class="flex items-start px-4 py-6 w-full ">
                             <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                             src="{{asset($challenge->user->image->path)}}" alt="avatar">
+                             src="{{asset($challenge->user->image->path)}}" alt="avatar image of{{$challenge->user->name}}">
                             <div class="">
 
                                 <div class="flex items-center justify-between">
@@ -30,7 +30,8 @@
 
                                 @if($challenge->image != null )
                                     <div class="flex items-center justify-between  mx-auto">
-                                        <img src="{{asset($challenge->image->path)}}">
+                                        <img src="{{asset($challenge->image->path)}}"
+                                             alt="image uploaded by the user {{$challenge->user->name}}">
                                     </div>
                                 @endif
 
@@ -39,6 +40,7 @@
                                     <form method="POST">
                                         @csrf
                                         <div class="group">
+
                                             <input id="form-token" type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <button class="flex mr-2 text-gray-700 text-sm group-hover:text-red-300" value="{{$challenge->id}}"
                                                     onclick="likeChallenge(this.value)">

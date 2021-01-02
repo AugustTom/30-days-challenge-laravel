@@ -7,6 +7,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
 use App\Providers\CommentCreated;
 use Illuminate\Support\Facades\Route;
+use App\Models\Joke;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+//Binding a joke to the app to be used later.
+app()->bind('joke', function($app){
+    return new Joke();
+});
+
+Route::get('/joke', [PagesController::class,'joke']);
+
 Route::get("/",[PagesController::class,'index']);
 
 Route::get('/dashboard', function () {
@@ -41,7 +46,6 @@ Route::post('posts/create', [PostsController::class, 'store'])->middleware('auth
 Route::get('posts/{id}/edit', [PostsController::class, 'edit'])->middleware('auth');
 
 Route::get('posts/{id}', [PostsController::class, 'show'])->middleware('auth');
-
 
 Route::put('posts/{id}/edit', [PostsController::class, 'update'])->middleware('auth');
 
@@ -70,7 +74,3 @@ Route::post('posts/{id}/enter', [PostsController::class, 'enter'])->
 name('challenge.enter')->middleware('auth');
 
 
-
-//Route::get('/', 'CommentController@index')->middleware('auth');
-//
-//Route::post('/', 'CommentController@store')->middleware('auth');
