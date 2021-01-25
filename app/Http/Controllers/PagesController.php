@@ -2,19 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Models\Challenge;
 
-class PagesController extends Controller
+use App\Models\Joke;
+use Illuminate\Support\Facades\Auth;
+
+
+class PagesController extends AuthenticatedSessionController
 {
+    /** return list of database items
+    */
     public function index(){
-        //TODO pagination is fucked
-        $posts = Post::orderBy('created_at','desc')->paginate(10);
-        return view('pages.index') -> with('posts', $posts);
+
+        if(Auth::check()) {
+            $challenges = Challenge::orderBy('created_at', 'desc')->simplePaginate(5);
+            return view('pages.index')->with('challenges', $challenges);
+        }
+        else{
+
+            return $this->create();
+        }
     }
 
+
+    /** Returns about page
+     *
+     */
     public function about(){
         $title = 'About website';
         return view('pages.about') -> with('title', $title);
     }
+
+    /**
+     * returns a joke
+     * @param Joke $joke
+     */
+    public function joke(Joke $joke){
+        return $joke->getAJoke();
+    }
+
+
 }

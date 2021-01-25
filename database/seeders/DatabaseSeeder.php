@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(5)->create();
-         \App\Models\Post::factory(10)->create();
-         \App\Models\Comment::factory(50)->create();
+        $this->call([
+            UserTableSeeder::class,
+            ChallengeSeeder::class,
+            CommentTableSeeder::class,
 
+        ]);
     }
 }

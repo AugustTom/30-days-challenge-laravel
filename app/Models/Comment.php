@@ -15,16 +15,22 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'post_id',
         'text',
     ];
 
+    /** Functions to retrieve relationships
+     *
+     * user function returns the user that created the comment
+     * @return BelongsTo relationship with User Model
+     */
     public function user(){
         return $this->belongsTo("App\Models\User");
     }
-
-    public function post(){
-        return $this->belongsTo('App\Models\Post');
+    /**
+     * post function retrieves the post that the comment belongs to
+     * @return BelongsTo relationship with Post Model
+     */
+    public function challenge(){
+        return $this->belongsTo('App\Models\Challenge');
     }
 }
